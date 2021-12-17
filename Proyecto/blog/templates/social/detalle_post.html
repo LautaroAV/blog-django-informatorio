@@ -1,0 +1,54 @@
+{% extends 'social/layout.html' %}
+{% load humanize %}
+
+{% block content %}
+
+
+<article>
+    <div class="container-article">
+        <img src="{{ detalle_post.user.profile.image.url }}">
+        <div>
+            <h2 class="username"><a href="{% url 'profile' detalle_post.user.username %}">@{{ detalle_post.user.username }}</a></h2>
+            <i class="clock"></i>
+            <time data-time="#">{{ detalle_post.timestamp|naturaltime }}</time>
+            {% if detalle_post.user.username == user.username  %}
+                <a href="{% url 'edit' detalle_post.content %}">     Editar</a>
+                <a href="{% url 'eliminar' detalle_post.content %}">     Eliminar</a>
+            {% endif %}
+            <br>
+            <div class="post"><h3>{{ detalle_post.titulo }}</h3></div>
+
+            <div class="post">{{ detalle_post.content }}</div>
+            <img class='post_img_detail'src="{{ detalle_post.imagen.url }}">
+            <br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <h1 style="text-align: center;">Comentarios</h1>
+
+        {% if not detalle_post.comentario.all%}
+            No hay comentarios...
+        {% else %}
+            {% for com in detalle_post.comentario.all%}
+                <img src="{{ com.user.profile.image.url }}">
+                <h2 class="username"><a href="{% url 'profile' com.user.username %}">@{{ com.user.username }}</a></h2>
+                <i class="clock"></i>
+                <time data-time="#">{{ com.timestamp|naturaltime }}</time>
+                {% if com.user.username == user.username  %}
+                    <a href="{% url 'edit_comentario' com.content %}">     Editar</a>
+                    <a href="{% url 'eliminar_comentario' com.content %}">     Eliminar</a>
+                {% endif %}
+                <br><br><br>
+                <div class="post">{{ com.content }}</div>
+                <br><br><br>
+            {% endfor %}
+        {% endif %}
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'comentario' detalle_post.slug %}"><h3 style="color: #2F4F4F;">Agregar nuevo comentario</h3></a>
+            {% endif %}
+        </div>
+
+        
+    </div>
+</article>
+
+
+{% endblock %}
