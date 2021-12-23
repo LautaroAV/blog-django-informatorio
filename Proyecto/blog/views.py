@@ -105,17 +105,20 @@ def edit_comentario(request,content):
     contexto = {
         'form':ComentarioForm(instance=comentario)
     }
-    
     if request.method=='POST':
         formulario = ComentarioForm(data=request.POST, instance=comentario)
         if formulario.is_valid():
             formulario.save()
             return redirect('feed')
         contexto['form'] = formulario
-
     return render(request,'social/edit.html', contexto)
 
 def eliminar_comentario(request,content):
     comentario = get_object_or_404(Comentario,content=content)
     comentario.delete()
     return redirect('feed')
+
+def ver_categoria(request,cats):
+    post_categoria = Post.objects.filter(categoria=cats) 
+    return render(request, 'social/categoria.html', {'cats':cats, 'post_categoria':post_categoria})
+

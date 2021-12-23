@@ -17,6 +17,7 @@ class Post(models.Model):
     content = models.TextField()
     imagen = models.ImageField(null=True,blank=True,upload_to="images/")
     publicado = models.BooleanField('Publicado',default = True)
+    categoria = models.CharField('Categoria', max_length = 150)
 
     class Meta:
         ordering = ['-timestamp']
@@ -36,4 +37,8 @@ class Comentario(models.Model):
     def __str__(self):
         return f'{self.user.username}: {self.content}'
 
+class Categoria(models.Model):
+    nombre = models.CharField(max_length = 150)
 
+    def __str__(self):
+        return self.nombre

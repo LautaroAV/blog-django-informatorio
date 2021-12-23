@@ -16,8 +16,9 @@
                 <a href="{% url 'eliminar' detalle_post.content %}">     Eliminar</a>
             {% endif %}
             <br>
-            <div class="post"><h3>{{ detalle_post.titulo }}</h3></div>
-
+            <div class="post"><h2>{{ detalle_post.titulo }}</h2></div>
+            <a href="{% url 'categoria' detalle_post.categoria %}">Categoria: {{ detalle_post.categoria }}</a>
+            <br><br><br>
             <div class="post">{{ detalle_post.content }}</div>
             <img class='post_img_detail'src="{{ detalle_post.imagen.url }}">
             <br><br><br>

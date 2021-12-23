@@ -20,7 +20,9 @@
             <a href="{% url 'eliminar' post.content %}">     Eliminar</a>
             {% endif %}
             <br>
-            <div class="post"><h3>{{ post.titulo }}</h3></div>
+            <div class="post"><h2>{{ post.titulo }}</h2></div>
+            <a href="{% url 'categoria' post.categoria %}">Categoria: {{ post.categoria }}</a>
+            <br><br><br>
             <div class="post">{{ post.content }}</div>
         </div>
     </div>
@@ -40,7 +42,9 @@
         <a href="{% url 'eliminar' post.content %}">     Eliminar</a>
         {% endif %}
         <br>
-        <div class="post"><h3>{{ post.titulo }}</h3></div>
+        <div class="post"><h2>{{ post.titulo }}</h2></div>
+        <a href="{% url 'categoria' post.categoria %}">Categoria: {{ post.categoria }}</a>
+        <br><br><br>
         <div class="post">{{ post.content }}</div>
     </div>
 </div>
