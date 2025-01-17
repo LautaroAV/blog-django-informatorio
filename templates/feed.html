@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+
+{% for post in posts %}
+
+<article>
+    <div class="container-article">
+    {% if post.user.username == user.username and post.publicado == False%}   
+        
+        <img class='profile' src="{{ post.user.profile.image.url }}">
+
+        <div>
+            <h2 class="username"><a href="{% url 'profile' post.user.username %}">@{{ post.user.username }}</a></h2>
+            <i class="clock"></i>
+            <time data-time="#">{{ post.timestamp|naturaltime }}</time>
+            {% if post.user.username == user.username  %}
+            <a href="{% url 'edit' post.content %}">     Editar</a>
+            <a href="{% url 'eliminar' post.content %}">     Eliminar</a>
+            {% endif %}
+            <br>
+            <div class="post"><h2>{{ post.titulo }}</h2></div>
+            <a href="{% url 'categoria' post.categoria %}">Categoria: {{ post.categoria }}</a>
+            <br><br><br>
+            <div class="post">{{ post.content }}</div>
+        </div>
+    </div>
+            <img class='post_img'src="{{ post.imagen.url }}">
+            <br><br><br>
+            <a href="{% url 'detalle_post' post.slug %}">    Ver más</a>
+    {% endif %}
+    {% if post.publicado == True%}
+    <img class='profile' src="{{ post.user.profile.image.url }}">
+
+    <div>
+        <h2 class="username"><a href="{% url 'profile' post.user.username %}">@{{ post.user.username }}</a></h2>
+        <i class="clock"></i>
+        <time data-time="#">{{ post.timestamp|naturaltime }}</time>
+        {% if post.user.username == user.username  %}
+        <a href="{% url 'edit' post.content %}">     Editar</a>
+        <a href="{% url 'eliminar' post.content %}">     Eliminar</a>
+        {% endif %}
+        <br>
+        <div class="post"><h2>{{ post.titulo }}</h2></div>
+        <a href="{% url 'categoria' post.categoria %}">Categoria: {{ post.categoria }}</a>
+        <br><br><br>
+        <div class="post">{{ post.content }}</div>
+    </div>
+</div>
+        <img class='post_img'src="{{ post.imagen.url }}">
+        <br><br><br>
+        <a href="{% url 'detalle_post' post.slug %}">    Ver más</a>
+    {% endif %}
+
+
+</article>
+
+
+{% endfor %}
+
+{% endblock %}
+

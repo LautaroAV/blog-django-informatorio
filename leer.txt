@@ -1,2 +1,0 @@
-Si están en Windows el comando para activar el entorno virtual es el siguiente:
-blog_env\scripts\activate.bat
